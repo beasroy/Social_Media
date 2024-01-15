@@ -1,3 +1,4 @@
+'use server';
 import Post from "@/lib/models/Post";
 import User from "@/lib/models/User";
 import { connectToDB } from "@/lib/mongodb/mongoose";
