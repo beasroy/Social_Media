@@ -59,6 +59,12 @@ const PostCard = ({ post, creator, update, loggedInUser }) => {
         setUserData(data);
         update()
     };
+    const handleDelete = async () => {
+        await fetch(`/api/post/${post._id}/${userData._id}`, {
+            method: "DELETE",
+        });
+        update()
+    }
 
 
     return (

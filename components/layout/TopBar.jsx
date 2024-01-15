@@ -1,16 +1,39 @@
 'use client';
-import React, { useState } from 'react'
-import { AddPhotoAlternateOutlined, Search, Logout } from "@mui/icons-material";
-import { SignOutButton, SignedIn } from "@clerk/nextjs"
 
+import { AddPhotoAlternateOutlined, Search, Logout ,Person} from "@mui/icons-material";
+import { useState,useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import Loader from '../Loader';
+
 import Link from 'next/link';
-import logo from "../../public/assets/Pulse.png"
+
+import { UserButton } from '@clerk/nextjs';
 const TopBar = () => {
+    const { user, isLoaded } = useUser();
+
+    const [loading, setLoading] = useState(true);
+
+    const [userData, setUserData] = useState({});
+
+    const getUser = async () => {
+        const response = await fetch(`/api/user/${user.id}`);
+        const data = await response.json();
+        setUserData(data);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        if (user) {
+            getUser();
+        }
+    }, [user]);
     const [search, setSearch] = useState("")
     const router = useRouter();
-    return (
+
+    return !isLoaded || loading ? (
+        <Loader />
+      ) : (
         <div className='flex justify-between items-center mt-6'>
             <div className='relative'>
                 <input
@@ -28,16 +51,10 @@ const TopBar = () => {
                 <AddPhotoAlternateOutlined sx={{ color: "teal" }} onClick={() => router.push("/create-post")} />
             </div>
             <div className="flex gap-4 md:hidden">
-                <SignedIn>
-                    <SignOutButton>
-                        <div className="flex cursor-pointer items-center md:hidden">
-                            <Logout sx={{ color: "dark-1", fontSize: "26px" }} />
-                        </div>
-                    </SignOutButton>
-                </SignedIn>
-                <Link href="/" className='md:hidden'>
-                    <Image src={logo} alt='profile image' width={50} height={50} className='rounded-full md:hidden' />
+                <Link href={`/profile/${userData._id}/posts`}>
+                    <Person sx={{ fontSize: "35px", color: "teal" }} />
                 </Link>
+                <UserButton afterSignOutUrl="/sign-in" />
             </div>
 
         </div>
