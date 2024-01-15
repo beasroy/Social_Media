@@ -2,10 +2,11 @@ import Post from "@/lib/models/Post";
 import User from "@/lib/models/User";
 import { connectToDB } from "@/lib/mongodb/mongoose"
 import { writeFile } from "fs/promises"
+import microCors from "micro-cors";
 
+const cors = microCors();
 
-
-export const POST = async (req) => {
+const POST = async (req) => {
     const path = require("path")
 
     const currentWorkingDirectory = process.cwd()
@@ -50,3 +51,5 @@ export const POST = async (req) => {
         return new Response("Failed to create a new post", { status: 500 })
     }
 }
+
+export default cors(POST)
