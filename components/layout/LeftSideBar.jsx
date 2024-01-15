@@ -6,7 +6,7 @@ import logo from "../../public/assets/Pulse.png"
 import Menu from "./Menu"
 import { SignOutButton, SignedIn, UserButton ,useUser} from "@clerk/nextjs"
 import { Logout } from "@mui/icons-material"
-import Loader from "../loader";
+import Loader from "../Loader";
 
 const LeftSideBar = () => {
   const { user, isLoaded } = useUser();
