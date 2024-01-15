@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { AddPhotoAlternateOutlined, Search, Logout } from "@mui/icons-material";
 import { SignOutButton, SignedIn } from "@clerk/nextjs"
+
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';

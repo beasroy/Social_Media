@@ -90,6 +90,19 @@ import {
       label: "Liked Posts",
     },
   ];
-  
+  export const tabs = [
+    {
+      link: "posts",
+      name: "Posts",
+    },
+    {
+      link: "followers",
+      name: "Followers",
+    },
+    {
+      link: "following",
+      name: "Following",
+    },
+  ];
   
     
