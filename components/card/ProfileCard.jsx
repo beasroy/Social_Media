@@ -87,7 +87,7 @@ const ProfileCard = ({ userData, activeTab }) => {
           </div>
         </div>
 
-        {user._id !== userData.clerkId &&
+        {user.id !== userData.clerkId &&
           (isFollowing ? (
             <PersonRemove
               sx={{ color: "#7857FF", cursor: "pointer", fontSize: "40px" }}
