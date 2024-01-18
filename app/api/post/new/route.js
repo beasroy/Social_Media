@@ -47,7 +47,7 @@ export const POST = async (req) => {
         return new Response(JSON.stringify(newPost), { status: 200 })
 
     } catch (err) {
-        console.log(err.message)
+        console.log(`Message: ${err.message}\nStack: ${err.stack}`);
         return new Response("Failed to create a new post", { status: 500 })
     }
 }
